@@ -37,8 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.8
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -46,6 +46,21 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+
+flutter_native_splash:
+  color: "FFFFFF"
+  image: assets/images/user_avatar.png
+  android: true
+  android_gravity: center
+  ios: true
+  android_12:
+    icon_background_color: "FFFFFF"
+    image: assets/images/user_avatar.png
+
+flutter_icons:
+  image_path: "assets/images/user_avatar.png"
+  android: "ic_launcher"	# 指定生成的图标名
+  ios: true	# iOS是否也生成图标
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

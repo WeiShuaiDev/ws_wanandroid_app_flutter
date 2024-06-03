@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="ws_wanandroid_app_flutter"
+        android:label="WSWanAndroidAppFlutter"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
