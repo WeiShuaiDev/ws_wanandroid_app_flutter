@@ -23,10 +23,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         password.isNotEmpty &&
         confirmPassword.isNotEmpty) {
       //发起注册请求
-      ToastUtil.showToast(
+      ToastUtil.show(
           msg: "当前注册的用户名：$username → 密码：$password 确认密码：$confirmPassword");
     } else {
-      ToastUtil.showToast(msg: "用户名或密码不能为空");
+      ToastUtil.show(msg: "用户名或密码不能为空");
     }
   }
 

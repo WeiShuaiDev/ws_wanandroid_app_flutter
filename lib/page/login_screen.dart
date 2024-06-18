@@ -19,9 +19,9 @@ class _LoginScreenState extends State<LoginScreen> {
     final password = _passwordController.text;
     if (username.isNotEmpty && password.isNotEmpty) {
       //发起登录请求
-      ToastUtil.showToast(msg: "当前登录的用户名：$username → 密码：$password");
+      ToastUtil.show(msg: "当前登录的用户名：$username → 密码：$password");
     } else {
-      ToastUtil.showToast(msg: "用户名或密码不能为空");
+      ToastUtil.show(msg: "用户名或密码不能为空");
     }
   }
 

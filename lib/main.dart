@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ws_wanandroid_app_flutter/page/splash_screen.dart';
 import 'package:ws_wanandroid_app_flutter/page/home_screen.dart';
+import 'http/dio_client.dart';
 
 void main() {
+  DioClient.init("https://www.wanandroid.com/");
   runApp(const MyApp());
 }
 
