@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -38,7 +39,9 @@ class DioClient {
   Future<Response> _performRequest(Future<Response> Function() dioCall) async {
     try {
       Response response = await dioCall();
-      var resp = DataResponse<String>.fromJson(response.data, (json) => json);
+      var resp = DataResponse<String?>.fromJson(
+          response.data, (value) => json.encode(value));
+      print(resp.errorCode);
       // 根据不同的响应码执行不同的处理逻辑
       switch (resp.errorCode) {
         case 0:
@@ -49,7 +52,6 @@ class DioClient {
           throw OtherException(resp.errorMsg);
       }
     } on DioException catch (e) {
-      print("${e.message}");
       rethrow;
     }
   }

@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:ws_wanandroid_app_flutter/http/dio_client.dart';
+import 'package:ws_wanandroid_app_flutter/model/base_response.dart';
+import 'package:ws_wanandroid_app_flutter/model/user_info.dart';
 import 'package:ws_wanandroid_app_flutter/page/register_screen.dart';
+import 'package:ws_wanandroid_app_flutter/util/dialog_util.dart';
+import 'package:ws_wanandroid_app_flutter/util/shared_preferences_util.dart';
 import 'package:ws_wanandroid_app_flutter/util/toast_util.dart';
+
+import '../http/exception.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,10 +26,37 @@ class _LoginScreenState extends State<LoginScreen> {
     final username = _usernameController.text;
     final password = _passwordController.text;
     if (username.isNotEmpty && password.isNotEmpty) {
-      //发起登录请求
-      ToastUtil.show(msg: "当前登录的用户名：$username → 密码：$password");
+      //弹出登录对话框
+      showLoadingDialog(context);
+      // 在发起登录请求
+      DioClient().post("user/login", params: {
+        "username": username,
+        "password": password
+      }).then((value) async {
+        // 关闭Loading对话框
+        Navigator.pop(context);
+        var resp = DataResponse<UserInfo>.fromJson(
+            value.data, (json) => UserInfo.fromJson(json));
+        ToastUtil.show(msg: "登录成功");
+        // 获取响应头里的Set-Cookie，设置到请求头中，并通过sp持久化到本地
+        List<String>? cookies = value.headers['Set-Cookie'];
+        if (cookies != null) {
+          DioClient().setCookies(cookies);
+          SharedPreferencesUtil.getInstance()
+              .then((value) => value.putStringList("cookies", cookies));
+          //关闭登录页
+          Navigator.pop(context);
+        }
+      }).catchError((e) {
+        Navigator.pop(context);
+        if (e is OtherException) {
+          ToastUtil.show(msg: "登录失败：${e.message}");
+        } else {
+          ToastUtil.show(msg: "登录失败：$e");
+        }
+      });
     } else {
-      ToastUtil.show(msg: "用户名或密码不能为空");
+      Fluttertoast.showToast(msg: "用户名或密码不能为空");
     }
   }
 

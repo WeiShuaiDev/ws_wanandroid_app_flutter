@@ -19,7 +19,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     DioClient()
         .get("lg/coin/userinfo/json")
@@ -45,7 +44,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-              decoration: BoxDecoration(color: Color(0xFF222222)),
+              decoration: const BoxDecoration(color: Color(0xFF222222)),
               child: GestureDetector(
                 child: Text(
                   _integral != null ? _integral!.username : "去登录",
