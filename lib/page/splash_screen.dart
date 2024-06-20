@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Text(
           'WSWanAndroidAppFlutter',
           style: TextStyle(
-              color: Colors.black87,
+              color: Colors.black,
               fontSize: 28.0,
               fontWeight: FontWeight.bold)
         ),
