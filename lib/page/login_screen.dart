@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:ws_wanandroid_app_flutter/http/dio_client.dart';
 import 'package:ws_wanandroid_app_flutter/model/base_response.dart';
 import 'package:ws_wanandroid_app_flutter/model/user_info.dart';
 import 'package:ws_wanandroid_app_flutter/page/register_screen.dart';
+import 'package:ws_wanandroid_app_flutter/provider/login_status.dart';
 import 'package:ws_wanandroid_app_flutter/util/dialog_util.dart';
 import 'package:ws_wanandroid_app_flutter/util/shared_preferences_util.dart';
 import 'package:ws_wanandroid_app_flutter/util/toast_util.dart';
@@ -37,7 +41,11 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pop(context);
         var resp = DataResponse<UserInfo>.fromJson(
             value.data, (json) => UserInfo.fromJson(json));
+        SharedPreferencesUtil.getInstance()
+            .then((value) => value.putString("user_info", json.encode(resp)));
         ToastUtil.show(msg: "登录成功");
+        Provider.of<LoginStatus>(context, listen: false)
+            .updateLoginStatus(true);
         // 获取响应头里的Set-Cookie，设置到请求头中，并通过sp持久化到本地
         List<String>? cookies = value.headers['Set-Cookie'];
         if (cookies != null) {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:ws_wanandroid_app_flutter/http/dio_client.dart';
 import 'package:ws_wanandroid_app_flutter/http/exception.dart';
 import 'package:ws_wanandroid_app_flutter/page/login_screen.dart';
+import 'package:ws_wanandroid_app_flutter/provider/login_status.dart';
 
 import '../model/base_response.dart';
 import '../model/integral.dart';
@@ -20,6 +22,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   void initState() {
     super.initState();
+    Provider.of<LoginStatus>(context, listen: false).addListener(_requestCoin);
+    _requestCoin();
+  }
+  // 请求积分的方法
+  void _requestCoin() {
     DioClient()
         .get("lg/coin/userinfo/json")
         .then((value) => setState(() {

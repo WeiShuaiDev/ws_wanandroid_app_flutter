@@ -1,5 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:ws_wanandroid_app_flutter/util/toast_util.dart';
+
+import '../http/dio_client.dart';
+import '../http/exception.dart';
+import '../model/base_response.dart';
+import '../model/user_info.dart';
+import '../provider/login_status.dart';
+import '../util/dialog_util.dart';
+import '../util/shared_preferences_util.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -22,11 +34,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (username.isNotEmpty &&
         password.isNotEmpty &&
         confirmPassword.isNotEmpty) {
-      //发起注册请求
-      ToastUtil.show(
-          msg: "当前注册的用户名：$username → 密码：$password 确认密码：$confirmPassword");
+      //弹出登录对话框
+      showLoadingDialog(context);
+      // 在发起登录请求
+      DioClient().post("/user/register", params: {
+        "username": username,
+        "password": password,
+        "repassword": confirmPassword
+      }).then((value) async {
+        // 关闭Loading对话框
+        Navigator.pop(context);
+        var resp = DataResponse<UserInfo>.fromJson(
+            value.data, (json) => UserInfo.fromJson(json));
+        SharedPreferencesUtil.getInstance()
+            .then((value) => value.putString("user_info", json.encode(resp)));
+        ToastUtil.show(msg: "注册成功");
+        Provider.of<LoginStatus>(context, listen: false)
+            .updateLoginStatus(true);
+        // 获取响应头里的Set-Cookie，设置到请求头中，并通过sp持久化到本地
+        List<String>? cookies = value.headers['Set-Cookie'];
+        if (cookies != null) {
+          DioClient().setCookies(cookies);
+          SharedPreferencesUtil.getInstance()
+              .then((value) => value.putStringList("cookies", cookies));
+          //关闭注册页面
+          Navigator.pop(context);
+        }
+      }).catchError((e) {
+        Navigator.pop(context);
+        if (e is OtherException) {
+          ToastUtil.show(msg: "注册失败：${e.message}");
+        } else {
+          ToastUtil.show(msg: "注册失败：$e");
+        }
+      });
     } else {
-      ToastUtil.show(msg: "用户名或密码不能为空");
+      Fluttertoast.showToast(msg: "用户名或密码不能为空");
     }
   }
 
