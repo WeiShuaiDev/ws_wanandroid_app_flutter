@@ -33,10 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
       //弹出登录对话框
       showLoadingDialog(context);
       // 在发起登录请求
-      DioClient().post("user/login", params: {
-        "username": username,
-        "password": password
-      }).then((value) async {
+      DioClient().post("user/login",
+          params: {"username": username, "password": password}).then((value) {
         // 关闭Loading对话框
         Navigator.pop(context);
         var resp = DataResponse<UserInfo>.fromJson(

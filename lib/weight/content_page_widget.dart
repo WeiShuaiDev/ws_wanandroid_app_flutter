@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:ws_wanandroid_app_flutter/weight/home_page_widget.dart';
 
-class ContentPageView extends StatefulWidget {
+class ContentPageWidget extends StatefulWidget {
   final PageController pageController;
   final Function(int) onPageChanged;
 
-  const ContentPageView(
+  const ContentPageWidget(
       {super.key, required this.pageController, required this.onPageChanged});
 
   @override
-  State<ContentPageView> createState() => _ContentPageViewState();
+  State<ContentPageWidget> createState() => _ContentPageWidgetState();
 }
 
-class _ContentPageViewState extends State<ContentPageView> {
+class _ContentPageWidgetState extends State<ContentPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -20,7 +21,7 @@ class _ContentPageViewState extends State<ContentPageView> {
       controller: widget.pageController,
       children: const [
         Center(
-          child: Text("首页"),
+          child: HomePageWidget(), //首页
         ),
         Center(
           child: Text("公众号"),

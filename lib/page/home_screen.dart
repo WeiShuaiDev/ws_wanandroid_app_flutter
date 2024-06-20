@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ws_wanandroid_app_flutter/weight/bottom_bar_widget.dart';
-import 'package:ws_wanandroid_app_flutter/weight/content_page_view.dart';
-import 'package:ws_wanandroid_app_flutter/weight/drawer_screen.dart';
+import 'package:ws_wanandroid_app_flutter/weight/content_page_widget.dart';
+import 'package:ws_wanandroid_app_flutter/page/drawer_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -42,13 +42,13 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text("首页", style: TextStyle(color: Colors.white)),
+        title: const Text("WSWanAndroidAppFlutter", style: TextStyle(color: Colors.white)),
       ),
       body: Container(
         color: Colors.white,
         child: Column(
           children: [
-            ContentPageView(
+            ContentPageWidget(
                 pageController: _pageController, onPageChanged: _onPageChanged),
             BottomBarWidget(
                 currentIndex: _currentIndex, onItemSelected: _onItemSelected)

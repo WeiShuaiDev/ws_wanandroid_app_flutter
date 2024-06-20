@@ -41,7 +41,6 @@ class DioClient {
       Response response = await dioCall();
       var resp = DataResponse<String?>.fromJson(
           response.data, (value) => json.encode(value));
-      print(resp.errorCode);
       // 根据不同的响应码执行不同的处理逻辑
       switch (resp.errorCode) {
         case 0:
@@ -51,7 +50,7 @@ class DioClient {
         default:
           throw OtherException(resp.errorMsg);
       }
-    } on DioException catch (e) {
+    } on DioException catch (_) {
       rethrow;
     }
   }
