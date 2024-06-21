@@ -1,14 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'article_info.g.dart';
+part 'index_article_info.g.dart';
 
 @JsonSerializable()
-class ArticleInfo extends Object {
+class IndexArticleInfo extends Object {
   @JsonKey(name: 'curPage')
   int curPage;
 
   @JsonKey(name: 'datas')
-  List<Datas> datas;
+  List<ArticleInfo> datas;
 
   @JsonKey(name: 'offset')
   int offset;
@@ -25,7 +25,7 @@ class ArticleInfo extends Object {
   @JsonKey(name: 'total')
   int total;
 
-  ArticleInfo(
+  IndexArticleInfo(
     this.curPage,
     this.datas,
     this.offset,
@@ -35,14 +35,14 @@ class ArticleInfo extends Object {
     this.total,
   );
 
-  factory ArticleInfo.fromJson(Map<String, dynamic> srcJson) =>
-      _$ArticleInfoFromJson(srcJson);
+  factory IndexArticleInfo.fromJson(Map<String, dynamic> srcJson) =>
+      _$IndexArticleInfoFromJson(srcJson);
 
-  Map<String, dynamic> toJson() => _$ArticleInfoToJson(this);
+  Map<String, dynamic> toJson() => _$IndexArticleInfoToJson(this);
 }
 
 @JsonSerializable()
-class Datas extends Object {
+class ArticleInfo extends Object {
   @JsonKey(name: 'adminAdd')
   bool adminAdd;
 
@@ -148,7 +148,7 @@ class Datas extends Object {
   @JsonKey(name: 'zan')
   int zan;
 
-  Datas(
+  ArticleInfo(
     this.adminAdd,
     this.apkLink,
     this.audit,
@@ -186,10 +186,10 @@ class Datas extends Object {
     this.zan,
   );
 
-  factory Datas.fromJson(Map<String, dynamic> srcJson) =>
-      _$DatasFromJson(srcJson);
+  factory ArticleInfo.fromJson(Map<String, dynamic> srcJson) =>
+      _$ArticleInfoFromJson(srcJson);
 
-  Map<String, dynamic> toJson() => _$DatasToJson(this);
+  Map<String, dynamic> toJson() => _$ArticleInfoToJson(this);
 }
 
 @JsonSerializable()

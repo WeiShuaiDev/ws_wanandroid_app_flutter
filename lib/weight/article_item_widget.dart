@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ws_wanandroid_app_flutter/model/article_info.dart';
+import 'package:ws_wanandroid_app_flutter/model/index_article_info.dart';
 
 class ArticleItemWidget extends StatefulWidget {
-  final Datas data;
+  final ArticleInfo articleInfo;
 
-  const ArticleItemWidget({super.key, required this.data});
+  const ArticleItemWidget({super.key, required this.articleInfo});
 
   @override
   State<ArticleItemWidget> createState() => _ArticleItemWidgetState();
@@ -16,7 +16,7 @@ class _ArticleItemWidgetState extends State<ArticleItemWidget> {
     return GestureDetector(
       child: Card(
         color: Colors.white,
-        elevation: 4,
+        elevation: 1,
         margin: const EdgeInsets.all(5),
         child: Column(
           children: [
@@ -24,7 +24,7 @@ class _ArticleItemWidgetState extends State<ArticleItemWidget> {
               padding: const EdgeInsets.all(12.0),
               alignment: Alignment.topLeft,
               child: Text(
-                widget.data.title,
+                widget.articleInfo.title,
                 style: const TextStyle(fontSize: 16, color: Colors.black),
               ),
             ),
@@ -35,16 +35,16 @@ class _ArticleItemWidgetState extends State<ArticleItemWidget> {
               ),
               Expanded(
                   child: Text(
-                widget.data.author,
+                widget.articleInfo.author,
                 style: const TextStyle(fontSize: 12, color: Colors.grey),
               )),
               Text(
-                widget.data.superChapterName,
+                widget.articleInfo.superChapterName,
                 style: const TextStyle(fontSize: 12, color: Colors.grey),
               ),
               const SizedBox(width: 12.0),
               Text(
-                widget.data.niceDate,
+                widget.articleInfo.niceDate,
                 style: const TextStyle(fontSize: 12, color: Colors.grey),
               ),
               const SizedBox(width: 12.0)

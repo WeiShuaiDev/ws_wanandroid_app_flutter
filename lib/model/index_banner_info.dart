@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'banner.g.dart';
+part 'index_banner_info.g.dart';
 
 @JsonSerializable()
-class Banner extends Object {
+class IndexBannerInfo extends Object {
   @JsonKey(name: 'desc')
   String desc;
 
@@ -28,7 +28,7 @@ class Banner extends Object {
   @JsonKey(name: 'url')
   String url;
 
-  Banner(
+  IndexBannerInfo(
     this.desc,
     this.id,
     this.imagePath,
@@ -39,8 +39,8 @@ class Banner extends Object {
     this.url,
   );
 
-  factory Banner.fromJson(Map<String, dynamic> srcJson) =>
-      _$BannerFromJson(srcJson);
+  factory IndexBannerInfo.fromJson(Map<String, dynamic> srcJson) =>
+      _$IndexBannerInfoFromJson(srcJson);
 
-  Map<String, dynamic> toJson() => _$BannerToJson(this);
+  Map<String, dynamic> toJson() => _$IndexBannerInfoToJson(this);
 }

@@ -1,15 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'article_info.dart';
+part of 'index_article_info.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ArticleInfo _$ArticleInfoFromJson(Map<String, dynamic> json) => ArticleInfo(
+IndexArticleInfo _$IndexArticleInfoFromJson(Map<String, dynamic> json) =>
+    IndexArticleInfo(
       (json['curPage'] as num).toInt(),
       (json['datas'] as List<dynamic>)
-          .map((e) => Datas.fromJson(e as Map<String, dynamic>))
+          .map((e) => ArticleInfo.fromJson(e as Map<String, dynamic>))
           .toList(),
       (json['offset'] as num).toInt(),
       json['over'] as bool,
@@ -18,7 +19,7 @@ ArticleInfo _$ArticleInfoFromJson(Map<String, dynamic> json) => ArticleInfo(
       (json['total'] as num).toInt(),
     );
 
-Map<String, dynamic> _$ArticleInfoToJson(ArticleInfo instance) =>
+Map<String, dynamic> _$IndexArticleInfoToJson(IndexArticleInfo instance) =>
     <String, dynamic>{
       'curPage': instance.curPage,
       'datas': instance.datas,
@@ -29,7 +30,7 @@ Map<String, dynamic> _$ArticleInfoToJson(ArticleInfo instance) =>
       'total': instance.total,
     };
 
-Datas _$DatasFromJson(Map<String, dynamic> json) => Datas(
+ArticleInfo _$ArticleInfoFromJson(Map<String, dynamic> json) => ArticleInfo(
       json['adminAdd'] as bool,
       json['apkLink'] as String,
       (json['audit'] as num).toInt(),
@@ -69,7 +70,8 @@ Datas _$DatasFromJson(Map<String, dynamic> json) => Datas(
       (json['zan'] as num).toInt(),
     );
 
-Map<String, dynamic> _$DatasToJson(Datas instance) => <String, dynamic>{
+Map<String, dynamic> _$ArticleInfoToJson(ArticleInfo instance) =>
+    <String, dynamic>{
       'adminAdd': instance.adminAdd,
       'apkLink': instance.apkLink,
       'audit': instance.audit,
