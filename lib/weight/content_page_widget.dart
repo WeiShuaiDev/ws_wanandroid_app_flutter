@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ws_wanandroid_app_flutter/weight/home_page_widget.dart';
+import 'package:ws_wanandroid_app_flutter/weight/wx_page_widget.dart';
 
 class ContentPageWidget extends StatefulWidget {
   final PageController pageController;
@@ -24,7 +25,7 @@ class _ContentPageWidgetState extends State<ContentPageWidget> {
           child: HomePageWidget(), //首页
         ),
         Center(
-          child: Text("公众号"),
+          child: WxPageWidget(), //公众号
         ),
         Center(
           child: Text("其他"),
