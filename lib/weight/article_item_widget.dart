@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ws_wanandroid_app_flutter/model/index_article_info.dart';
+import 'package:ws_wanandroid_app_flutter/page/browser_page_screen.dart';
 
 class ArticleItemWidget extends StatefulWidget {
   final ArticleInfo articleInfo;
@@ -55,10 +56,10 @@ class _ArticleItemWidgetState extends State<ArticleItemWidget> {
       ),
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Container(
-              color: Colors.white,
-              alignment: Alignment.center,
-              child: const Text('文章阅读页'));
+          return BrowserPageScreen(
+            url: widget.articleInfo.link,
+            title: widget.articleInfo.title,
+          );
         }));
       },
     );
